@@ -49,3 +49,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+### 报错
+> Push rejected: Push to origin/master was rejected
+
+在 Terminal 窗口执行如下命令：
+
+```log
+
+C:\L\Tools\PortableGit-2.20.1-64-bit.7z\bin\git.exe pull origin master --al
+low-unrelated-histories
+
+```
