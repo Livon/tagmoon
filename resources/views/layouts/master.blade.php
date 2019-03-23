@@ -83,7 +83,7 @@
 
 <script src="../../../../markdown/highlight/highlight.min.js"></script>
 
-<script src="../../../../tagMoon/public/js/myApp.js"></script>
+<script src="{{asset('js/myApp.js')}}"></script>
 
 @yield('myJavascript')
 
