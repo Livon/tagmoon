@@ -19,7 +19,7 @@ item.edit.recentlyUsedTag_btnClick = function(){
     //itemTags.insert( itemId, tagButton.attr('tagId'), tagButton.text() );
     itemTags.insert( itemId, tagId, tagName );
 
-    doc.tag.refresh();
+    doc.tag.load();
 
 
 };
@@ -30,6 +30,7 @@ item.edit.recentlyUsedTag_btnClick = function(){
 item.edit.tagQueryResult_btnClick = function(){
 
     itemTags.insert( itemId, $(this).attr('tagId'), $(this).text() );
+    doc.tag.load();
 
 };
 // 添加 Tag
@@ -37,6 +38,7 @@ item.edit.addTag_btnClick = function(){
 
     var tagName = $('#input_tag_queryKeyword').val();
     itemTags.insert( itemId, 0, tagName );
+    doc.tag.load();
 };
 
 /**
@@ -140,7 +142,7 @@ $(document).ready(function () {
     });
 
     //showTags(itemId);
-    doc.tag.refresh();
+    doc.tag.load();
 
 
     //item.edit.recentlyUsed_tagButton_click();
@@ -188,7 +190,7 @@ $(document).ready(function () {
     //        if( responseResult.insertedId > 0 ){
     //            toastr.info('添加成功！id = ' + responseResult.insertedId );
     //            //showTags(itemId);
-    //            doc.tag.refresh();
+    //            doc.tag.load();
     //        }else {
     //            toastr.info('添加失败！exceptionMessage = ' + responseResult.exceptionMessage );
     //        }
@@ -217,10 +219,8 @@ $(document).ready(function () {
                 toastr.info('添加成功！id = ' + responseResult.insertedId );
                 //showTags(itemId);
                 var itemTagsContainer = $('#div_ItemTags');
-                debugger;
-                doc.tag.refresh();
+                doc.tag.load();
                 itemTagsContainer.find('button').unbind('click').click(function (btn) {
-                    debugger;
                     console.log( '2019.03.24 14:09' );
                     console.log( btn )
                 })
@@ -231,12 +231,10 @@ $(document).ready(function () {
     });
 
     $('#input_new_tag1').change( function(){
-        debugger;
         console.log( '#input_new_tag change event fired.');
     });
 
     $('#input_new_tag1').keypress(function(event){
-        debugger;
         var keycode = (event.keyCode ? event.keyCode : event.which);
         console.log( 'event：');
         console.log( event );
@@ -251,7 +249,6 @@ $(document).ready(function () {
 
     var input_tag_old_value = '';
     $('#input_new_tag').keyup(function(event){
-        debugger;
         var keycode = (event.keyCode ? event.keyCode : event.which);
         var newValue = $.trim( $(this).val() );
         console.log( '现在的值：');
@@ -268,7 +265,6 @@ $(document).ready(function () {
     });
 
     $('#div_tags1 div').click( function(index, element){
-        debugger;
         toastr.info('div clicked');
         console.log( this );
         console.log( element );
@@ -324,7 +320,7 @@ function tag_remove( itemId, tagId ){
 
     $.get(url, function(data,status){
         //showTags(itemId);
-        doc.tag.refresh();
+        doc.tag.load();
         toastr.info( 'delResult: ' + data.delResult );
     });
 }
@@ -419,8 +415,7 @@ var doc = {
 /**
  * 显示标签
  */
-doc.tag.refresh = function () {
-
+doc.tag.doLoad = function(){
     console.log('2018.02.04 17:22');
     doc.tag.container.hide(500);
 
@@ -437,7 +432,7 @@ doc.tag.refresh = function () {
             );
         });
         //div_tags_edit.toggle(500);
-        doc.tag.container.refresh(500);
+        doc.tag.container.show(500);
 
         $("[data-toggle='popover']").popover();
 
@@ -446,6 +441,10 @@ doc.tag.refresh = function () {
         toastr.info('标签已加载');
 
     });
+};
+doc.tag.load = function () {
+
+    setTimeout( doc.tag.doLoad, 1000 );
 };
 
 doc.tag.click = function () {
@@ -461,14 +460,12 @@ doc.tag.click = function () {
         success: function(resp) {
             if ( resp.success ) {
                 toastr.info('删除成功');
-                doc.tag.refresh();
+                doc.tag.load();
             } else {
                 toastr.info("删除失败: " + resp.errMsg );
             }
         }
     });
-
-    debugger ;
 
     $('#exampleModal').find('.modal-title').text( $(this).attr('tagId') );
     $('#exampleModal').find('.modal-body').html( $(this).text() );

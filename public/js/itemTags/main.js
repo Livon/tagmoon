@@ -116,12 +116,6 @@ itemTags.showTags = function ( itemId, container ){
 
         container.find( 'button').click( function(){
 
-            debugger
-
-            // TODO 删除标签
-
-
-
             $('#exampleModal').find('.modal-title').text( $(this).attr('tagId') );
             $('#exampleModal').find('.modal-body').html( $(this).text() );
             //$('#exampleModal').find('button[tagId]').attr('tagId', $(this).attr('tagId') );

@@ -64,12 +64,12 @@ item.query = function( pageNumber ){
 
                 var itemListFormat = '<div name="item" id="div_item_{0}"><hr>'
                     + '<p><span name="itemId">{0}</span>'
+                    // 删除按钮
+                    + '<button name="delete" type="button" class="btn btn-outline-danger btn-rounded waves-effect">delete</button>'
                         // 查看
                     + ' <a target="_blank" href="../article/view/{0}" itemId="{0}">view</a>'
                         // 修改
                     + ' <a target="_blank" href="edit/{0}" itemId="{0}">edit</a>'
-                        // 删除按钮
-                    + '<button name="delete" type="button" class="btn btn-outline-danger btn-rounded waves-effect">delete</button>'
                     // 时间
                     + '<span> {1} </span></p>'
                         // 标签

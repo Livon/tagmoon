@@ -79,4 +79,7 @@ Route::get('/tasks/insert/{name}.html',['as'=>'tasks.index','uses'=>'TasksContro
 
 Route::get('/', function () {
     return 'Hello World';
-});
+})->name('rootPath');
+
+// Doc - 记录、文档
+Route::resource('doc', 'DocController');
