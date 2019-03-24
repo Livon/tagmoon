@@ -72,25 +72,22 @@ class ItemTagsCtrl extends Controller
 
     /**
      * 移除标签
-     * @param $itemId
-     * @param $tagId
-     * @return array
      */
-    public function tag_remove( $itemId, $tagId ){
+    public function tag_remove( Request $request ){
 
-//        DB::table('item_tags')->where(['itemId' => $itemId, '>', 100)->delete();
-
-        $delResult = 'Delete Success!';
+        $result = [];
+        $doc_id = $request->get('doc_id');
+        $tag_id = $request->get('tag_id');
 
         try {
-            DB::table('item_tags')->where([['itemId','=',$itemId],['tagId','=',$tagId ]])->delete();
+            DB::table('item_tags')->where([['itemId','=', $doc_id],['tagId','=',$tag_id ]])->delete();
+            $result['success'] = true;
         } catch (\Exception $e) {
-            $delResult = $e -> getMessage();
+            $result['success'] = false;
+            $result['errMsg'] = $e -> getMessage();
         }
 
-//        $insertedId = 999 ;
-
-        return ['delResult' => $delResult ];
+        return $result;
 
     }
 

@@ -16,6 +16,7 @@ item.query = function( pageNumber ){
     // 关键字
     var arr_keyValues = $('#input_item_queryKeywords').val().split(' ');
 
+    // 转码
     $.each( arr_keyValues, function( index, element){
         //arr_keyValues[index] = encodeURIComponent( element );
         var htmlEncoded = $('<div/>').text( element ).html();
@@ -35,9 +36,11 @@ item.query = function( pageNumber ){
     // 查询
     url = 'query';
 
+    // init
     $("#div_items").empty();
     $('#div_items_pagination_link').empty();
 
+    // 请求数据
     $.post( url ,{
         arr_keyValues : arr_keyValues,
         arr_tagIds : arr_tagIds,
@@ -50,6 +53,7 @@ item.query = function( pageNumber ){
 
         if( data ){
 
+            // 分页
             myApp.pageLink_show( 'div_items_pagination_link', response.items );
 
             //$("#div_ltems_pagination_link").prepend( 'current_page:{0} from:{1} to:{2} total:{3}'.format(
@@ -65,16 +69,18 @@ item.query = function( pageNumber ){
                         // 修改
                     + ' <a target="_blank" href="edit/{0}" itemId="{0}">edit</a>'
                         // 删除按钮
-                    + '<button name="delete" type="button" class="btn btn-outline-danger btn-rounded waves-effect">delete</button></p>'
+                    + '<button name="delete" type="button" class="btn btn-outline-danger btn-rounded waves-effect">delete</button>'
+                    // 时间
+                    + '<span> {1} </span></p>'
                         // 标签
                     + '<p name="itemTags"></p>'
                         // 内容
-                    + '<pre>{1}</pre>'
+                    + '<pre>{2}</pre>'
                     //+ '{1}'
                     + '</div>';
 
                 //var itemList = itemListFormat.format( element.id, SMDE.markdown( decodeURIComponent( element.name ) ) );
-                var itemList = itemListFormat.format( element.id, SMDE.markdown( htmlDecode( decodeURIComponent( element.name )) ) );
+                var itemList = itemListFormat.format( element.id, element.timestamp, SMDE.markdown( htmlDecode( decodeURIComponent( element.name )) ) );
 
                 // 显示
                 //var item_name_decoded = htmlDecode( decodeURIComponent( item_name ) );

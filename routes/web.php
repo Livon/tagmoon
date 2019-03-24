@@ -30,17 +30,19 @@ Route::get('/article/view/{id}','ArticleCtrl@articleView');
 
 Route::get('/item/edit/{id}','TagController@itemEdit');
 Route::post('/item/update','TagController@itemUpdate');
-Route::post('/item/query','ItemCtrl@itemQuery');
+Route::post('/item/query','ItemCtrl@itemQuery') ;
 Route::get('/item/delete/{id}','ItemCtrl@itemDelete');
 
 Route::post('/tag/query','TagCtrl@query');
 Route::get('/tag/recentlyUsed/logging/{id}','TagRecentlyUsedCtrl@logging');
 Route::get('/tag/recentlyUsed/getList','TagRecentlyUsedCtrl@getList');
 
+// itemTags - docTag
 Route::post('/itemTags/insert','ItemTagsCtrl@insert');
 Route::get('/itemTags/getTagsByItemId/{itemId}','ItemTagsCtrl@getTagsByItemId');
 Route::get('/itemTags/tag/add/{itemId}/{tagId}','ItemTagsCtrl@getTagsByItemId');
 Route::get('/itemTags/tag/remove/{itemId}/{tagId}','ItemTagsCtrl@tag_remove');
+Route::delete('/itemTags','ItemTagsCtrl@tag_remove');
 
 Route::get('/JsonDataLake/get','JsonDataLakeCtrl@getJsonData');
 

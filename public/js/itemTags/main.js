@@ -11,7 +11,7 @@ namespace.reg('itemTags');
  */
 
 
-
+// 添加标签
 itemTags.insert = function( itemId, tagId, tagName ){
 
     toastr.info('添加标签中 ... ');
@@ -115,6 +115,11 @@ itemTags.showTags = function ( itemId, container ){
         //})
 
         container.find( 'button').click( function(){
+
+            debugger
+
+            // TODO 删除标签
+
 
 
             $('#exampleModal').find('.modal-title').text( $(this).attr('tagId') );

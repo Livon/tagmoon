@@ -7,6 +7,7 @@
 
 namespace.reg('item.search');
 
+// 最近使用 Tag 按键
 item.search.recentlyUsedTag_btnClick = function() {
 
     console.log('2018.02.05 12:36');
@@ -66,6 +67,7 @@ item.search.tagQueryResult_btnClick = function(){
 
 }
 
+// 删除确认
 item.search.itemDeleteConfirm_btnClick = function(){
 
     console.log( $(this) );
@@ -82,7 +84,7 @@ item.search.itemDeleteConfirm_btnClick = function(){
 }
 
 
-
+// 删除取消
 item.search.itemDeleteCancel_btnClick = function() {
 // 取消按钮
     $(this).prev().remove();

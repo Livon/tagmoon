@@ -157,13 +157,13 @@ class ItemCtrl extends Controller
 //        var_dump( $arr_tagIds[0] );
 
         $itemQuery = \DB::table('item')
-            -> select('item.id','item.name')->distinct();
+            -> select('item.id','item.name','item.timestamp')->distinct();
 
         for($i = 0; $i < count( $arr_tagIds ); $i++)
         {
 //            var_dump( $i );
-            $itemQuery -> leftJoin('item_tags as it'.$i, 'it'.$i.'.itemId', '=', 'item.id' );
-            $itemQuery -> where( 'it'.$i.'.tagId', '=', $arr_tagIds[$i] );
+            $itemQuery -> leftJoin('item_tags as i_t'.$i, 'i_t'.$i.'.itemId', '=', 'item.id' );
+            $itemQuery -> where( 'i_t'.$i.'.tagId', '=', $arr_tagIds[$i] );
         }
 
         $arr_whereCondition =[];
